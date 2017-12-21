@@ -12,7 +12,8 @@
 		}
 
 		public function index(){
-
+			$books = $this->bookModel->All();
+			require_once('View/book/index.php');
 		}
 
 		public function show(){
