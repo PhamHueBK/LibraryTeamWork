@@ -3,7 +3,7 @@
 
 	class Reader extends Model{
 		public $table = "BanDoc";
-		public $primaryKey = "id";
+		public $primaryKey = "maBanDoc";
 
 		public function __construct(){
 			parent::__construct();
