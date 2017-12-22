@@ -227,7 +227,7 @@
                             if(response.length > 0){
                                 var data = result;
                                 
-                                $('#addTag').modal('hide');
+                                $('#addUser').modal('hide');
                                 var flag = $('.flag');
                                 var html ='<tr id="user_'+data.maNhanVien+'">'+
                                     '<td>'+data.tenNhanVien+'</td>'+

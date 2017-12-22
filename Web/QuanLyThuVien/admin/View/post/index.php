@@ -5,19 +5,18 @@
 		<table id="table" class="table table-hover" width="100%">
 			<thead>
 				<tr>
-					<th colspan="7">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBook">
+					<th colspan="6">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPost">
 							Thêm mới
 						</button>
 					</th>
 				</tr>
 				<tr class="flag">
-					<th>Mã sách</th>
-					<th>Tên sách</th>
-					<th>Nhà xuất bản</th>
-					<th>Tác giả</th>
-					<th>Mô tả</th>
-                    <th>Ghi chú</th>
+					<th>Tên bài đăng</th>
+                    <th>Môt tả</th>
+					<th>Người đăng</th>
+					<th>Loại bài</th>
+					<th>Ngày đăng</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -27,18 +26,16 @@
 					foreach ($data as $key => $value) {
 					$i++;
 				 ?>
-				<tr id="book_<?php echo $value['maQuyenSach']; ?>">
-                    <td><?php echo $value['maQuyenSach']; ?></td>
-					<td><?php echo $value['tenQuyenSach']; ?></td>
-					<td><?php echo $value['nhaXuatBan']; ?></td>
-					<td><?php echo $value['tacGia']; ?></td>
-					<td><?php echo $value['moTa']; ?></td>
-                    <td><?php echo $value['ghiChu']; ?></td>
+				<tr id="post_<?php echo $value['maBaiDang']; ?>">
+                    <td><?php echo $value['maBaiDang']; ?></td>
+                    <td><?php echo $value['tenBaiDang']; ?></td>
+					<td><?php echo $value['tenNhanVien']; ?></td>
+					<td><?php echo $value['loaiBaiDang']; ?></td>
+					<td><?php echo $value['ngayDang']; ?></td>
 					<td>
-						<a href="?mode=book&act=show&id=<?php echo $value['maQuyenSach']; ?>" class="btn btn-primary" style="width:100%; margin:1%">Xem</a>
-						<a href="javascript:;" class="btn btn-success" onclick="alertEdit(<?php echo $value['maQuyenSach']; ?>)" style="width:100%; margin:1%">Sửa</a>
-						<a href="javascript:;" class="btn btn-danger" onclick="alertDel(<?php echo $value['maQuyenSach']; ?>)"  style="width:100%; margin:1%">Xóa</a>
-                        <a href="?mode=bookDetail&act=index&maQuyenSach=<?php echo $value['maQuyenSach']; ?>" class="btn btn-primary" style="width:100%; margin:1%">Thêm chi tiết đầu sách</a>
+						<a href="?mode=post&act=show&id=<?php echo $value['maBaiDang']; ?>" class="btn btn-primary" style="width:100%; margin:1%">Xem</a>
+						<a href="javascript:;" class="btn btn-success" onclick="alertEdit(<?php echo $value['maBaiDang']; ?>)" style="width:100%; margin:1%">Sửa</a>
+						<a href="javascript:;" class="btn btn-danger" onclick="alertDel(<?php echo $value['maBaiDang']; ?>)"  style="width:100%; margin:1%">Xóa</a>
 					</td>
 				</tr>
 				<?php 
@@ -48,41 +45,48 @@
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="addBook" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	<div class="modal fade" id="addPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   		<div class="modal-dialog" role="document">
     		<div class="modal-content">
       			<div class="modal-header">
-        			<h5 class="modal-title" id="exampleModalLongTitle">Thêm mới đầu sách</h5>
+        			<h5 class="modal-title" id="exampleModalLongTitle">Thêm bài viết mới</h5>
         			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           				<span aria-hidden="true">&times;</span>
         			</button>
       			</div>
       			<div class="modal-body col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
-        			<form action="" method="POST" class="form-horizontal" role="form">
+        			<form action="" method="POST" class="form-horizontal" role="form" enctype=”multipart/form-data”>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="maNhanVien" id="maNhanVien" value="<?php echo $_SESSION['admin']['maNhanVien']; ?>">
+                        </div>
     					<div class="form-group">
-    						<label>Tên sách <span style="color: red">*</span></label>
-    						<input type="text" class="form-control" name="tenQuyenSach" id="tenQuyenSach" placeholder="Tên sách">
-    					</div>
-
-    					<div class="form-group">
-    						<label>Nhà xuất bản <span style="color: red">*</span></label>
-    						<input type="txt" class="form-control" name="nhaXuatBan" id="nhaXuatBan" placeholder="Nhà xuất bản" required="true">
-    					</div>
-
-    					<div class="form-group">
-    						<label>Tác giả <span style="color: red">*</span></label>
-    						<input type="txt" class="form-control" name="tacGia" id="tacGia" placeholder="Tác giả" required="true">
-    					</div>
-
-    					<div class="form-group">
-    						<label>Mô tả</label><br>
-                            <textarea cols="60" rows="10" class="form-group" name="moTa" id="moTa" placeholder="Mô tả"></textarea>
+    						<label>Tên bài viết <span style="color: red">*</span></label>
+    						<input type="text" class="form-control" name="tenBaiDang" id="tenBaiDang" placeholder="Tên bài viết">
     					</div>
 
                         <div class="form-group">
-                            <label>Ghi chú (Nếu có)</label><br>
-                            <textarea cols="60" rows="10" class="form-group" name="ghiChu" id="ghiChu" placeholder="Ghi chú"></textarea>
+                            <label>Mô tả <span style="color: red">*</span></label>
+                            <input type="text" class="form-control" name="moTa" id="moTa" placeholder="Mô tả">
                         </div>
+
+    					<div class="form-group">
+    						<label>Nội dung <span style="color: red">*</span></label>
+    						<textarea id="noiDung" name="noiDung" cols="60" rows="10" placeholder="Nội dung bài viết"></textarea>
+    					</div>
+
+    					<div class="form-group">
+    						<label>Loại bài đăng</label><br>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="loaiBaiDang" id="loaiBaiDang" value="0" checked="checked">
+                                    Thông báo
+                                </label>
+                                <label>
+                                    <input type="radio" name="loaiBaiDang" id="loaiBaiDang" value="1">
+                                    Tin tức
+                                </label>
+                            </div>
+    					</div>
         			</form>
       			</div>
       			<div class="modal-footer">
@@ -99,41 +103,48 @@
   		<div class="modal-dialog" role="document">
     		<div class="modal-content">
       			<div class="modal-header">
-        			<h5 class="modal-title" id="exampleModalLongTitle">Cập nhật thông tin đầu sách</h5>
+        			<h5 class="modal-title" id="exampleModalLongTitle">Cập nhật thông tin sách</h5>
         			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           				<span aria-hidden="true">&times;</span>
         			</button>
       			</div>
       			<div class="modal-body col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
-        			<form action="" method="POST" class="form-horizontal" role="form">
-        					<div class="form-group">
-        						<input type="hidden" class="form-control" id="editId">
-        					</div>
-        					
-        					<div class="form-group">
-        						<label>Tên sách <span style="color: red">*</span></label>
-        						<input type="text" class="form-control" id="editTenQuyenSach" placeholder="Tên đầu sách" required="true">
-        					</div>
+        			<form action="" method="POST" class="form-horizontal" role="form" enctype=”multipart/form-data”>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="editMaBaiDang" id="editMaBaiDang">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="maNhanVien" id="maNhanVien" value="<?php echo $_SESSION['admin']['maNhanVien']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên bài viết <span style="color: red">*</span></label>
+                            <input type="text" class="form-control" name="editTenBaiDang" id="editTenBaiDang" placeholder="Tên bài viết">
+                        </div>
 
-        					<div class="form-group">
-        						<label>Nhà xuất bản <span style="color: red">*</span></label>
-        						<input type="txt" class="form-control" id="editNhaXuatBan" placeholder="Nhà xuất bản" required="true">
-        					</div>
+                        <div class="form-group">
+                            <label>Mô tả <span style="color: red">*</span></label>
+                            <input type="text" class="form-control" name="editMoTa" id="editMoTa" placeholder="Mô tả">
+                        </div>
 
-        					<div class="form-group">
-        						<label>Tác giả  <span style="color: red">*</span></label>
-        						<input type="txt" class="form-control" id="editTacGia" placeholder="Tác giả" required="true">
-        					</div>
+                        <div class="form-group">
+                            <label>Nội dung <span style="color: red">*</span></label>
+                            <textarea id="editNoiDung" name="editNoiDung" cols="60" rows="10" placeholder="Nội dung bài viết"></textarea>
+                        </div>
 
-        					<div class="form-group">
-        						<label>Mô tả</label>
-        						<textarea cols="60" rows="10" class="form-group" name="editMoTa" id="editMoTa" placeholder="Mô tả"></textarea>
-        					</div>
-                            <div class="form-group">
-                                <label>Ghi chú</label>
-                                <textarea cols="60" rows="10" class="form-group" name="editGhiChu" id="editGhiChu" placeholder="Ghi chú"></textarea>
+                        <div class="form-group">
+                            <label>Loại bài đăng</label><br>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="editLoaiBaiDang" id="editLoaiBaiDang" value="0" checked="checked">
+                                    Thông báo
+                                </label>
+                                <label>
+                                    <input type="radio" name="editLoaiBaiDang" id="editLoaiBaiDang" value="1">
+                                    Tin tức
+                                </label>
                             </div>
-        			</form>
+                        </div>
+                    </form>
       			</div>
       			<div class="modal-footer">
         			<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
@@ -145,23 +156,23 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#ThemMoi').click(function(){
-                var maQuyenSach = 'NULL';
-                var tenQuyenSach = $('#tenQuyenSach').val();
-                var nhaXuatBan = $('#nhaXuatBan').val();
-                var tacGia = $('#tacGia').val();
+                var maBaiDang = 'NULL';
+                var tenBaiDang = $('#tenBaiDang').val();
                 var moTa = $('#moTa').val();
-                var ghiChu = $('#ghiChu').val();
+                var noiDungBaiDang = $('#noiDung').val();
+                var maNhanVien = $('#maNhanVien').val();
+                var loaiBaiDang = $('#loaiBaiDang').val();
 
                 $.ajax({
                     type: "post",
-                    url: '?mode=book&act=create',
+                    url: '?mode=post&act=create',
                     data: {
-                        maQuyenSach : maQuyenSach,
-                        tenQuyenSach : tenQuyenSach,
-                        nhaXuatBan : nhaXuatBan,
-                        tacGia : tacGia,
+                        maBaiDang : maBaiDang,
+                        tenBaiDang : tenBaiDang,
                         moTa : moTa,
-                        ghiChu : ghiChu,
+                        noiDungBaiDang : noiDungBaiDang,
+                        maNhanVien : maNhanVien,
+                        loaiBaiDang : loaiBaiDang,
                     },
                     success: function(res)
                     {
@@ -176,30 +187,28 @@
                             if(response.length > 0){
                                 var data = result;
                                 
-                                $('#addBook').modal('hide');
+                                $('#addPost').modal('hide');
                                 var flag = $('.flag');
-                                var html ='<tr id="book_'+data.maQuyenSach+'">'+
-                                    '<td>'+data.maQuyenSach+'</td>'+
-                                    '<td>'+data.tenQuyenSach+'</td>'+
-                                    '<td>'+data.nhaXuatBan+'</td>'+
-                                    '<td>'+data.tacGia+'</td>'+
+                                var html ='<tr id="post_'+data.maBaiDang+'">'+
+                                    '<td>'+data.tenBaiDang+'</td>'+
                                     '<td>'+data.moTa+'</td>'+
-                                    '<td>'+data.ghiChu+'</td>'+
+                                    '<td>'+data.tenNhanVien+'</td>'+
+                                    '<td>'+data.loaiBaiDang+'</td>'+
+                                    '<td>'+data.ngayDang+'</td>'+
                                     '<td align="center">'+
-                                    '<a style="width:100%" href="?mode=book&act=show&id='+data.maQuyenSach+'" type="button" onclick="" class="btn btn-primary">'+
+                                    '<a style="width:100%" href="?mode=post&act=show&id='+data.maBaiDang+'" type="button" onclick="" class="btn btn-primary">'+
                                       'Xem'+
-                                    '<a style="width:100%" href="javascript:;" type="button" onclick="alertEdit('+data.maQuyenSach+')" class="btn btn-success">'+
+                                    '<a style="width:100%" href="javascript:;" type="button" onclick="alertEdit('+data.maBaiDang+')" class="btn btn-success">'+
                                       'Sửa'+
                                     '</a> '+
-                                    '<a style="width:100%" href="javascript:;" type="button" onclick="alertDel('+data.maQuyenSach+')" class="btn btn-warning">'+
+                                    '<a style="width:100%" href="javascript:;" type="button" onclick="alertDel('+data.maBaiDang+')" class="btn btn-warning">'+
                                       '<i class="fa fa-trash-o"></i> Xóa'+
                                     '</a>'+
-                                    '<a href="?mode=bookDetail&act=index&maQuyenSach='+data.maQuyenSach+'" class="btn btn-primary" style="width:100%; margin:1%">Thêm chi tiết đầu sách</a>'+
                                     '</td>'+
                                   '</tr>';
                                 //$(html).insertBefore(flag);
                                 $(html).insertAfter(flag);
-                                $('#addBook').modal('hide');
+                                $('#addPost').modal('hide');
                                 toastr.success('Thêm mới thành công!', 'Nafosted',{timeOut: 1000});
                             }else{
                                 toastr.error('Thêm mới không thành công!', 'Nafosted',{timeOut: 1000});
@@ -217,7 +226,7 @@
             
         }); 
         function alertDel(id){
-            var path = "?mode=book&act=delete&maQuyenSach=" + id;
+            var path = "?mode=post&act=delete&maBaiDang=" + id;
             swal({
                 title: "Bạn có chắc muốn xóa?",
                 type: "warning",
@@ -241,7 +250,8 @@
                                 var result = JSON.parse(response);
                                 if(result.status){
                                     toastr.success('Xóa thành công!');
-                                    $('#book_'+result.maQuyenSach).remove();
+                                    $('#post_'+result.maCuonSach).remove();
+                                    $('#post_'+result.maCuonSach).html("");
                                 }
                                 else
                                     toastr.error(thrownError);
@@ -264,7 +274,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "?mode=book&act=edit&id=" + id,
+                url: "?mode=post&act=edit&id=" + id,
                 success: function(res)
                 {
                     console.log(res);
@@ -276,12 +286,11 @@
                         var result = JSON.parse(response);
                         console.log(result);
                         var data = result;
-                        $('#editId').val(data.maQuyenSach);
-                        $('#editTenQuyenSach').val(data.tenQuyenSach);
-                        $('#editNhaXuatBan').val(data.nhaXuatBan);
+                        $('#editTenBaiDang').val(data.tenBaiDang);
                         $('#editMoTa').val(data.moTa);
-                        $('#editTacGia').val(data.tacGia);
-                        $('#editGhiChu').val(data.ghiChu);
+                        $('#maNhanVien').val(data.maNhanVien);
+                        $('#editLoaiBaiDang').val(data.loaiBaiDang);
+                        $('#editNoiDung').val(data.noiDungBaiDang);
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -293,23 +302,21 @@
 
         $(document).ready(function () {
             $('#UpdateBtn').click(function() {
-                var maQuyenSach = $('#editId').val();
-                var tenQuyenSach = $('#editTenQuyenSach').val();
-                var nhaXuatBan = $('#editNhaXuatBan').val();
-                var tacGia = $('#editTacGia').val();
+                var maBaiDang = $('#editId').val();
+                var maNhanVien = $('#maNhanVien').val();
                 var moTa = $('#editMoTa').val();
-                var ghiChu = $('#editGhiChu').val();
+                var noiDungBaiDang = $('#editNoiDung').val();
+                var loaiBaiDang = $('#editLoaiBaiDang').val();
 
                 $.ajax({
                     type: "post",
-                    url: '?mode=book&act=update',
+                    url: '?mode=post&act=update',
                     data: {
-                        maQuyenSach : maQuyenSach,
-                        tenQuyenSach : tenQuyenSach,
-                        nhaXuatBan : nhaXuatBan,
-                        tacGia : tacGia,
+                        maBaiDang : maBaiDang,
+                        maNhanVien : maNhanVien,
                         moTa : moTa,
-                        ghiChu : ghiChu,
+                        noiDungBaiDang : noiDungBaiDang,
+                        loaiBaiDang : loaiBaiDang,
                     },
                     success: function(res)
                     {
@@ -322,24 +329,22 @@
                                 var result = JSON.parse(response);
                                 var data = result;
                                 $('#editBook').modal('hide');
-                                var html ='<td>'+data.maQuyenSach+'</td>'+
-                                    '<td>'+data.tenQuyenSach+'</td>'+
-                                    '<td>'+data.nhaXuatBan+'</td>'+
-                                    '<td>'+data.tacGia+'</td>'+
+                                var html ='<td>'+data.tenBaiDang+'</td>'+
                                     '<td>'+data.moTa+'</td>'+
-                                    '<td>'+data.ghiChu+'</td>'+
+                                    '<td>'+data.tenNhanVien+'</td>'+
+                                    '<td>'+data.loaiBaiDang+'</td>'+
+                                    '<td>'+data.ngayDang+'</td>'+
                                     '<td align="center">'+
-                                    '<a style="width:100%" href="?mode=book&act=show&id='+data.maQuyenSach+'" type="button" onclick="" class="btn btn-primary">'+
+                                    '<a style="width:100%" href="?mode=post&act=show&id='+data.maBaiDang+'" type="button" onclick="" class="btn btn-primary">'+
                                       'Xem'+
-                                    '<a style="width:100%" href="javascript:;" type="button" onclick="alertEdit('+data.maQuyenSach+')" class="btn btn-success">'+
+                                    '<a style="width:100%" href="javascript:;" type="button" onclick="alertEdit('+data.maBaiDang+')" class="btn btn-success">'+
                                       'Sửa'+
                                     '</a> '+
-                                    '<a style="width:100%" href="javascript:;" type="button" onclick="alertDel('+data.maQuyenSach+')" class="btn btn-warning">'+
+                                    '<a style="width:100%" href="javascript:;" type="button" onclick="alertDel('+data.maBaiDang+')" class="btn btn-warning">'+
                                       '<i class="fa fa-trash-o"></i> Xóa'+
                                     '</a>'+
-                                    '<a href="?mode=bookDetail&act=index&maQuyenSach='+data.maQuyenSach+'" class="btn btn-primary" style="width:100%; margin:1%">Thêm chi tiết đầu sách</a>'+
                                     '</td>';
-                                $('#book_'+data.maQuyenSach).html(html);
+                                $('#post_'+data.maBaiDang).html(html);
                                 toastr.success('Cập nhật thành công!', 'Nafosted',{timeOut: 1000});
                             }else{
                                 toastr.error('Cập nhật không thành công!', 'Nafosted',{timeOut: 1000});

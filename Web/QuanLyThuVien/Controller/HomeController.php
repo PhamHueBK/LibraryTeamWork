@@ -19,7 +19,7 @@
 			$post = $this->postModel->getAll($conditionPost);
 			$conditionNew = "where loaiBaiDang = 0 ORDER BY maBaiDang DESC LIMIT 0,10";
 			$news = $this->postModel->getAll($conditionNew);
-			$conditionBook = "join anhbia on cuonsach.maCuonSach = anhbia.maCuonSach ORDER BY cuonsach.maCuonSach DESC LIMIT 0,10";
+			$conditionBook = "ORDER BY cuonsach.maCuonSach DESC LIMIT 0,10";
 			$book = $this->bookModel->getAll($conditionBook);
 			//die($post['tenBaiDang']);
 			require_once('View/home/index.php');

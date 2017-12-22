@@ -52,6 +52,7 @@
 
 			$sql = "INSERT INTO ".$this->table."(".trim($fields,",").") VALUES (".trim($values,",").")";
 			//die($sql);
+			//return $sql;
 			if(isset($data['submit']))
 				unset($data['submit']);
 			//die($sql);
