@@ -90,10 +90,10 @@
                 }
                 break;
             }
-            case 'post':
+            case 'book':
             {
-                include_once('Controller/PostController.php');
-                $controller = new PostController();
+                include_once('Controller/BookController.php');
+                $controller = new BookController();
 
                 switch ($act) {
                     case 'create':
@@ -110,6 +110,11 @@
                     {
                         $controller->delete();
                         break;
+                    }
+                    case 'edit':
+                    {
+                    	$controller->edit();
+                    	break;
                     }
                     case 'show':
                     {
@@ -124,12 +129,11 @@
                 }
                 break;
             }
-            case 'tag':
+            case 'bookDetail':
             {
-                include_once('Controller/TagController.php');
-                $controller = new TagController();
-
-                switch ($act) {
+            	include_once('Controller/BookDetailController.php');
+            	$controller = new BookDetailController();
+            	switch ($act) {
                     case 'create':
                     {
                         $controller->create();
@@ -144,6 +148,49 @@
                     {
                         $controller->delete();
                         break;
+                    }
+                    case 'edit':
+                    {
+                    	$controller->edit();
+                    	break;
+                    }
+                    case 'show':
+                    {
+                        $controller->show();
+                        break;
+                    }
+                    default:
+                    {
+                        $controller->index();
+                        break;
+                    }
+                }
+                break;
+            }
+            case 'post':
+            {
+            	include_once('Controller/PostController.php');
+            	$controller = new PostController();
+            	switch ($act) {
+                    case 'create':
+                    {
+                        $controller->create();
+                        break;
+                    }
+                    case 'update':
+                    {
+                        $controller->update();
+                        break;
+                    }
+                    case 'delete':
+                    {
+                        $controller->delete();
+                        break;
+                    }
+                    case 'edit':
+                    {
+                    	$controller->edit();
+                    	break;
                     }
                     case 'show':
                     {

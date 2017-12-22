@@ -227,7 +227,7 @@
                             if(response.length > 0){
                                 var data = result;
                                 
-                                $('#addTag').modal('hide');
+                                $('#addUser').modal('hide');
                                 var flag = $('.flag');
                                 var html ='<tr id="user_'+data.maNhanVien+'">'+
                                     '<td>'+data.tenNhanVien+'</td>'+
@@ -354,10 +354,10 @@
                 var gioiTinh = $('#editGender').val();
                 var chucVu = $('#editChucVu').val();
                 var ngaySinh = $('#editBirthday').val();
-                console.log(maNhanVien);
+
                 $.ajax({
                     type: "post",
-                    url: '?mod=user&act=update',
+                    url: '?mode=user&act=update',
                     data: {
                         maNhanVien : maNhanVien,
                         tenNhanVien : tenNhanVien,
@@ -371,7 +371,7 @@
                     success: function(res)
                     {
                         console.log(res);
-                        /*if(!res.error) {
+                        if(!res.error) {
                             var start = res.indexOf("{");
                             var end = res.lastIndexOf("}");
                             var response = res.substring(start, end+1);
@@ -379,8 +379,7 @@
                                 var result = JSON.parse(response);
                                 var data = result;
                                 $('#editUser').modal('hide');
-                                var html ='<tr id="user_'+data.maNhanVien+'">'+
-                                        '<td>'+data.tenNhanVien+'</td>'+
+                                var html ='<td>'+data.tenNhanVien+'</td>'+
                                         '<td>'+data.email+'</td>'+
                                         '<td>'+data.soDienThoai+'</td>'+
                                         '<td>'+data.gioiTinh+'</td>'+
@@ -396,8 +395,7 @@
                                         '<a style="width:100%" href="javascript:;" type="button" onclick="alertDel('+data.maNhanVien+')" class="btn btn-warning">'+
                                           '<i class="fa fa-trash-o"></i> Xóa'+
                                         '</a>'+
-                                        '</td>'+
-                                      '</tr>';
+                                        '</td>';
                                 $('#user_'+data.maNhanVien).html(html);
                                 toastr.success('Cập nhật thành công!', 'Nafosted',{timeOut: 1000});
                             }else{
@@ -405,7 +403,7 @@
                             }
                         } else {
                             toastr.error('Error', 'Nafosted-Error',{timeOut: 1000});
-                        }*/
+                        }
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         toastr.error('Error', 'Nafosted-Error',{timeOut: 1000});

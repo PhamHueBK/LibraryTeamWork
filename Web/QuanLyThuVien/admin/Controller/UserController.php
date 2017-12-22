@@ -61,7 +61,7 @@
 
 		public function show(){
 			$id = $_GET['id'];
-			$data = $this->userModel->find($id);
+			$user = $this->userModel->find($id);
 			require_once('View/user/show.php');
 		}
 
@@ -71,11 +71,12 @@
 			$data['soDienThoai'] = "'".$data['soDienThoai']."'";
 			$data['gioiTinh'] = "N'".$data['gioiTinh']."'";
 			$data['ngaySinh'] = "'".$data['ngaySinh']."'";
+			$data['email'] = "'".$data['email']."'";
 			$data['chucVu'] = "N'".$data['chucVu']."'";
 			$data['diaChi'] = "N'".$data['diaChi']."'";
 			$data = $this->userModel->update($data, "maNhanVien");
-			//$jSonData = json_encode($data, false);
-     		echo $data;
+			$jSonData = json_encode($data, false);
+     		echo $jSonData;
 		}
 
 		public function edit(){

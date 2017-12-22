@@ -52,6 +52,7 @@
 
 			$sql = "INSERT INTO ".$this->table."(".trim($fields,",").") VALUES (".trim($values,",").")";
 			//die($sql);
+			//return $sql;
 			if(isset($data['submit']))
 				unset($data['submit']);
 			//die($sql);
@@ -76,8 +77,7 @@
 			}
 
 			$sql = "update ".$this->table." set ".trim($fields, ",")." where ".$this->primaryKey." = ".$data[$primaryKey];
-			return $sql;
-			die($sql);
+			//return $sql;
 			$result = $this->conn->query($sql);
 
 			$data = $this->find($data[$this->primaryKey]);
