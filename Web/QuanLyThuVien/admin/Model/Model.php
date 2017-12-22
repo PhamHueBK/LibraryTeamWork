@@ -76,8 +76,7 @@
 			}
 
 			$sql = "update ".$this->table." set ".trim($fields, ",")." where ".$this->primaryKey." = ".$data[$primaryKey];
-			return $sql;
-			die($sql);
+			//return $sql;
 			$result = $this->conn->query($sql);
 
 			$data = $this->find($data[$this->primaryKey]);

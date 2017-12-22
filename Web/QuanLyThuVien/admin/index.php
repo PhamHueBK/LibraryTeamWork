@@ -124,10 +124,10 @@
                 }
                 break;
             }
-            case 'tag':
+            case 'book':
             {
-                include_once('Controller/TagController.php');
-                $controller = new TagController();
+                include_once('Controller/BookController.php');
+                $controller = new BookController();
 
                 switch ($act) {
                     case 'create':
@@ -144,6 +144,11 @@
                     {
                         $controller->delete();
                         break;
+                    }
+                    case 'edit':
+                    {
+                    	$controller->edit();
+                    	break;
                     }
                     case 'show':
                     {
