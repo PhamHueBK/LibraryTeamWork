@@ -47,7 +47,7 @@
 			$condition = "where maDocGia = ".$user['maBanDoc'];
 			$phieuMuon = $this->blbModel->getAll($condition);
 			if(count($phieuMuon) > 0){
-				$condition = "join cuonsach on muontrachitiet.maCuonSach = cuonsach.maCuonSach where muontrachitiet.maPhieu =  ".$phieuMuon['phieuMuon'];
+				$condition = "join cuonsach on muontrachitiet.maCuonSach = cuonsach.maCuonSach where muontrachitiet.maPhieu =  ".$phieuMuon['maPhieu'];
 				$phieuMuonCT = $this->blbDetailModel->getAll($condition);
 			}
 			require_once('View/reader/profile.php');

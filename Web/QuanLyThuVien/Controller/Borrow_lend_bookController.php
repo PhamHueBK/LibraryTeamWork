@@ -26,27 +26,26 @@
 			$date = getdate();
 			$ngayTraSach = $date['mday'];
 			$thangTraSach = $date['mon'];
-			$namHienTai = $date['Year'];
+			$namHienTai = $date['year'];
 			$hanTra = mktime(0, 0, 0, ($thangTraSach+6), ($ngayTraSach), $namHienTai);
-			$hanTra = date('d/m/Y', $hanTra);
-			$ngayMuon = date('d/m/Y', $date);
+			$hanTra = date('d-m-Y', $hanTra);
+			//$ngayMuon = date('dd/mm/yyyy', $date);
 			require_once('View/borrow_lend_book/borrow.php');
 		}
 
 		public function borrow_access(){
 			$data = array();
 			$data['maPhieu'] = 'NULL';
-			$data['maDocGia'] = $_POST['maDocGia'];
+			$data['maDocGia'] = $_POST['maBanDoc'];
 			$data['chiPhi'] = $_POST['chiPhi'];
 			$data['tinhTrang'] = 0;
-			$data['ngayMuon'] = date('Y-m-d', $_POST['ngayMuon']);
 			$data = $this->blbModel->insert($data, "maPhieu");
 
 			$dataCT = array();
 			$dataCT['maPhieuMuonTraCT'] = 'NULL';
 			$dataCT['maPhieu'] = $data['maPhieu'];
 			$dataCT['maCuonSach'] = $_POST['maCuonSach'];
-			$dataCT['hanTra'] = date('Y-m-d', $_POST['hanTra']);
+			//$dataCT['hanTra'] = date('Y-m-d', $_POST['hanTra']);
 			$dataCT['trangThai'] = 1;
 			$dataCT = $this->blbDetailModel->insert($dataCT, "maPhieuMuonTraCT");
 			$books = $this->book->All();

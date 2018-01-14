@@ -3,7 +3,7 @@
 
 	class BookDetail extends Model{
 		public $table = "CuonSach";
-		public $primarykey = "maCuonSach";
+		public $primaryKey = "maCuonSach";
 
 		public function __construct(){
 			parent::__construct();

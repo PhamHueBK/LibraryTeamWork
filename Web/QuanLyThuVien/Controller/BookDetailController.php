@@ -3,15 +3,18 @@
 
 	class BookDetailController{
 		public $bookDetailModel;
+		public $table = "CuonSach";
+		public $primaryKey = " maCuonSach";
 
 		public function __construct(){
 			$this->bookDetailModel = new BookDetail();
 		}
 
 		public function index(){
+
 			$maQuyenSach = $_GET['id'];
 			$tenQuyenSach = "";
-			$condition = " where maQuyenSach = ".$maQuyenSach." AND trangThai = 0";
+			$condition = " where maQuyenSach = ".$maQuyenSach." AND tinhTrang = 0";
 			$books = $this->bookDetailModel->getAll($condition);
 
 			require_once('View/bookDetail/index.php');

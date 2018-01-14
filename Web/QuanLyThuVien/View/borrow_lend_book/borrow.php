@@ -8,7 +8,7 @@
 				</div>
 				<div class="form-group">
 					<label>Mã bạn đọc</label>
-					<input type="txt" class="form-control" readonly="true" id="maBanDoc" name="maBanDoc" value="<?php echo $maBanDoc; ?>">
+					<input type="txt" class="form-control" readonly="true" id="maBanDoc" name="maBanDoc" value="<?php echo $maDocGia; ?>">
 				</div>
 				<div class="form-group">
 					<label>Mã cuốn sách</label>

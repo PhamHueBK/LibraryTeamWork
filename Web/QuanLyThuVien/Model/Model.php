@@ -34,6 +34,7 @@
 
 		public function find($id){
 			$sql = "select * from ".$this->table." where ".$this->primaryKey." = ".$id;
+			die($sql);
 			mysqli_set_charset($this->conn, 'UTF8');
 			$result = $this->conn->query($sql);
 			$data = array();
