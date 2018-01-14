@@ -131,7 +131,7 @@
             }
             case 'bookDetail':
             {
-            	include_once('Controller/BookDetailController.php');
+            	include_once('Controller/BookDetailController.php')
             	$controller = new BookDetailController();
             	switch ($act) {
                     case 'create':
@@ -161,6 +161,7 @@
                     }
                     default:
                     {
+                    	
                         $controller->index();
                         break;
                     }

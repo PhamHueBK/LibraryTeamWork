@@ -122,7 +122,7 @@
 			case 'bookDetail':
 			{
 				include_once('Controller/BookDetailController.php');
-				$controller = new BookDetail();
+				$controller = new BookDetailController();
 				switch ($act) {
 					case 'show':
 					{
